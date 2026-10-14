@@ -1,0 +1,446 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #060911;
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ========================================================
+   PAGE TRANSITION & INTERACTION ANIMATIONS
+   ======================================================== */
+
+@keyframes pageEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.995);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes smokeGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.12), inset 0 0 15px rgba(16, 185, 129, 0.03);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.22), inset 0 0 25px rgba(16, 185, 129, 0.08);
+  }
+}
+
+@keyframes smokeBorderDrift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes microFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes borderBeamSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes neonRunningGlow {
+  0% {
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.35), inset 0 0 8px rgba(0, 240, 255, 0.18);
+    border-color: rgba(0, 240, 255, 0.7);
+  }
+  33% {
+    box-shadow: 0 0 18px rgba(16, 185, 129, 0.45), inset 0 0 10px rgba(16, 185, 129, 0.22);
+    border-color: rgba(16, 185, 129, 0.8);
+  }
+  66% {
+    box-shadow: 0 0 18px rgba(217, 70, 239, 0.45), inset 0 0 10px rgba(217, 70, 239, 0.22);
+    border-color: rgba(217, 70, 239, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.35), inset 0 0 8px rgba(0, 240, 255, 0.18);
+    border-color: rgba(0, 240, 255, 0.7);
+  }
+}
+
+@keyframes neonTextFlicker {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.25);
+  }
+  50% {
+    text-shadow: 0 0 14px rgba(16, 185, 129, 0.7), 0 0 28px rgba(16, 185, 129, 0.3);
+  }
+}
+
+.animate-border-beam-spin {
+  animation: borderBeamSpin 4s linear infinite;
+}
+
+.animate-border-beam-spin-fast {
+  animation: borderBeamSpin 2.2s linear infinite;
+}
+
+.animate-border-beam-spin-slow {
+  animation: borderBeamSpin 7.5s linear infinite;
+}
+
+.animate-neon-running-glow {
+  animation: neonRunningGlow 3.5s ease-in-out infinite;
+}
+
+.neon-text-glow {
+  animation: neonTextFlicker 4s ease-in-out infinite;
+}
+
+.animate-page-enter {
+  animation: pageEnter 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity, filter;
+}
+
+.smoke-glow {
+  animation: smokeGlowPulse 4s ease-in-out infinite;
+}
+
+.micro-float {
+  animation: microFloat 3s ease-in-out infinite;
+}
+
+/* Card hover lift & polished sheen */
+.interactive-card {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.interactive-card:hover {
+  transform: translateY(-2px);
+}
+
+/* ========================================================
+   DARK SMOKE THEME SPECIFICS
+   ======================================================== */
+
+.dark {
+  color-scheme: dark;
+}
+
+.dark body {
+  background-color: #04060a;
+  color: #f8fafc;
+}
+
+/* Translucent Frosted Glass Cards in Dark Mode */
+.dark .bg-white {
+  background-color: rgba(15, 23, 42, 0.75) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-color: rgba(51, 65, 85, 0.55) !important;
+}
+
+.dark header.bg-white,
+.dark aside.bg-white {
+  background-color: rgba(10, 15, 29, 0.82) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: rgba(51, 65, 85, 0.55) !important;
+}
+
+.dark .bg-slate-50 {
+  background-color: rgba(30, 41, 59, 0.6) !important;
+  border-color: rgba(51, 65, 85, 0.5) !important;
+}
+
+.dark .bg-slate-100 {
+  background-color: rgba(51, 65, 85, 0.45) !important;
+}
+
+.dark .bg-slate-200 {
+  background-color: rgba(51, 65, 85, 0.7) !important;
+}
+
+.dark .border-slate-200 {
+  border-color: rgba(51, 65, 85, 0.55) !important;
+}
+
+.dark .border-slate-300 {
+  border-color: rgba(71, 85, 105, 0.65) !important;
+}
+
+/* High Contrast Readable Text in Dark Mode */
+.dark .text-slate-900 {
+  color: #f8fafc !important;
+}
+
+.dark .text-slate-800 {
+  color: #f1f5f9 !important;
+}
+
+.dark .text-slate-700 {
+  color: #e2e8f0 !important;
+}
+
+.dark .text-slate-600 {
+  color: #cbd5e1 !important;
+}
+
+.dark .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+.dark .text-slate-400 {
+  color: #64748b !important;
+}
+
+/* Interactive elements in dark mode */
+.dark .hover\:bg-slate-50:hover {
+  background-color: rgba(30, 41, 59, 0.7) !important;
+}
+
+.dark .hover\:bg-slate-100:hover {
+  background-color: rgba(51, 65, 85, 0.6) !important;
+}
+
+.dark .hover\:text-slate-900:hover {
+  color: #ffffff !important;
+}
+
+.dark .hover\:text-slate-800:hover {
+  color: #f8fafc !important;
+}
+
+/* Inputs, Textareas, Selects */
+.dark input:not([type="checkbox"]):not([type="radio"]),
+.dark select,
+.dark textarea {
+  background-color: rgba(15, 23, 42, 0.85) !important;
+  color: #f8fafc !important;
+  border-color: rgba(71, 85, 105, 0.65) !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #64748b !important;
+}
+
+/* Tables styling in dark smoke mode */
+.dark table th {
+  background-color: rgba(15, 23, 42, 0.88) !important;
+  color: #94a3b8 !important;
+  border-color: rgba(51, 65, 85, 0.55) !important;
+}
+
+.dark table td {
+  border-color: rgba(51, 65, 85, 0.4) !important;
+}
+
+.dark tbody tr:hover td {
+  background-color: rgba(30, 41, 59, 0.45) !important;
+}
+
+/* Modals with luxury dark smoke glow */
+.dark .fixed .bg-white.rounded-xl,
+.dark .fixed .bg-white.rounded-2xl {
+  background-color: rgba(11, 17, 33, 0.94) !important;
+  border: 1px solid rgba(71, 85, 105, 0.5) !important;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 35px rgba(16, 185, 129, 0.1) !important;
+}
+
+/* ========================================================
+   NEON THEME SPECIFICS (High-Voltage Obsidian / Cyan / Lime)
+   ======================================================== */
+
+.neon-theme {
+  color-scheme: dark;
+}
+
+.neon-theme body {
+  background-color: #020409 !important;
+  color: #f8fafc !important;
+}
+
+/* Translucent Cyber Frosted Glass with Neon Aura */
+.neon-theme .bg-white {
+  background-color: rgba(6, 12, 28, 0.86) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: rgba(0, 240, 255, 0.3) !important;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.08), inset 0 0 15px rgba(16, 185, 129, 0.03) !important;
+}
+
+.neon-theme header.bg-white,
+.neon-theme aside.bg-white {
+  background-color: rgba(4, 8, 20, 0.94) !important;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-color: rgba(0, 240, 255, 0.38) !important;
+  box-shadow: 0 4px 25px rgba(0, 240, 255, 0.12) !important;
+}
+
+.neon-theme .bg-slate-50 {
+  background-color: rgba(12, 20, 42, 0.65) !important;
+  border-color: rgba(0, 240, 255, 0.22) !important;
+}
+
+.neon-theme .bg-slate-100 {
+  background-color: rgba(18, 30, 60, 0.55) !important;
+}
+
+.neon-theme .bg-slate-200 {
+  background-color: rgba(22, 38, 76, 0.7) !important;
+}
+
+.neon-theme .border-slate-200 {
+  border-color: rgba(0, 240, 255, 0.25) !important;
+}
+
+.neon-theme .border-slate-300 {
+  border-color: rgba(0, 240, 255, 0.4) !important;
+}
+
+/* Neon Text Highlights */
+.neon-theme .text-slate-900 {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.neon-theme .text-slate-800 {
+  color: #f1f5f9 !important;
+}
+
+.neon-theme .text-slate-700 {
+  color: #e2e8f0 !important;
+}
+
+.neon-theme .text-slate-600 {
+  color: #94a3b8 !important;
+}
+
+.neon-theme .text-slate-500 {
+  color: #64748b !important;
+}
+
+.neon-theme .text-emerald-700,
+.neon-theme .text-emerald-600 {
+  color: #00f0ff !important;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.6) !important;
+}
+
+.neon-theme .bg-emerald-600 {
+  background: linear-gradient(135deg, #00f0ff, #10b981) !important;
+  color: #020617 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.45) !important;
+}
+
+.neon-theme .hover\:bg-emerald-700:hover {
+  background: linear-gradient(135deg, #38bdf8, #34d399) !important;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.65) !important;
+}
+
+.neon-theme .bg-emerald-500\/10,
+.neon-theme .bg-emerald-50 {
+  background-color: rgba(0, 240, 255, 0.12) !important;
+  border-color: rgba(0, 240, 255, 0.3) !important;
+}
+
+.neon-theme input:not([type="checkbox"]):not([type="radio"]),
+.neon-theme select,
+.neon-theme textarea {
+  background-color: rgba(8, 16, 36, 0.92) !important;
+  color: #e0f2fe !important;
+  border-color: rgba(0, 240, 255, 0.38) !important;
+  box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.06);
+}
+
+.neon-theme input:focus,
+.neon-theme select:focus,
+.neon-theme textarea:focus {
+  border-color: #00f0ff !important;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4) !important;
+}
+
+.neon-theme table th {
+  background-color: rgba(8, 16, 36, 0.9) !important;
+  color: #38bdf8 !important;
+  border-color: rgba(0, 240, 255, 0.28) !important;
+}
+
+.neon-theme table td {
+  border-color: rgba(0, 240, 255, 0.18) !important;
+}
+
+.neon-theme tbody tr:hover td {
+  background-color: rgba(14, 26, 56, 0.5) !important;
+}
+
+.neon-theme .fixed .bg-white.rounded-xl,
+.neon-theme .fixed .bg-white.rounded-2xl {
+  background-color: rgba(6, 12, 28, 0.95) !important;
+  border: 1.5px solid rgba(0, 240, 255, 0.45) !important;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 35px rgba(0, 240, 255, 0.25), inset 0 0 20px rgba(16, 185, 129, 0.08) !important;
+}
+
+/* Clean scrollbar in dark mode */
+.dark ::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.4);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(51, 65, 85, 0.6);
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(71, 85, 105, 0.8);
+}
+
+/* Print styling for receipts and statements */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+  .dark .bg-white,
+  .dark .text-slate-900,
+  .dark body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+}

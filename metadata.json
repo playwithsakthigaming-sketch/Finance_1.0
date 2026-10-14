@@ -1,0 +1,6 @@
+{
+  "name": "Finance Management System - Weekly Loan & WhatsApp Automation",
+  "description": "Comprehensive weekly loan management dashboard for microfinance in India with Sunday dues, Tuesday penalty assessments, ledger accounting, Tamil/English receipts, and WhatsApp Business automation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
